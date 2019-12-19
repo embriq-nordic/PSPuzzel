@@ -10,6 +10,14 @@ function Get-PuzzelUser {
         [string[]] $Id,
 
         [Parameter(
+            Mandatory=$True,
+            ParameterSetName = "Identity"
+        )]
+        [Alias('userName')]
+        [string[]]
+        $Identity,
+
+        [Parameter(
             ParameterSetName = 'All'
         )]
         [switch] $All
@@ -18,6 +26,16 @@ function Get-PuzzelUser {
     begin {
         if (-not (Test-Token)) {
             throw "ERROR: You accessToken is not valid. Please run Connect-Puzzel first"
+        }
+
+        if ($PSCmdlet.ParameterSetName -eq 'Identity') {
+            try {
+                $AllUsers = Invoke-APIRequest -Uri "/users"
+            } catch {
+                Write-Error "ERROR: Could not fetch list of users"
+                Write-Error $_
+                return
+            }
         }
     }
 
@@ -30,7 +48,6 @@ function Get-PuzzelUser {
                 try {
                     $Response = Invoke-APIRequest -Uri ("/users/{0}" -f ($User))
                 } catch {
-                    Write-Error "ERROR: Could not fetch information about user with ID: $($User)"
                     Write-Error $_
                     return
                 }
@@ -38,6 +55,25 @@ function Get-PuzzelUser {
                 Write-Output $Response.result
             }
     
+        }
+
+        if ($PSCmdlet.ParameterSetName -eq 'Identity') {
+
+            foreach ($IdentityItem in $Identity) {
+
+                
+                $User = $AllUsers.result | Where-Object { $_.userName -eq "$($IdentityItem)" }
+                
+                if ($User) {
+                    Write-Verbose "Getting info about user with Identity: $($IdentityItem)"
+                    $Result = $User | Get-PuzzelUser
+                    Write-Output $Result
+                } else {
+                    Write-Error "Could not find any users with identity $($IdentityItem)"
+                    return
+                }
+
+            }
         }
     
         if ($PSCmdlet.ParameterSetName -eq 'All') {
