@@ -1,16 +1,16 @@
 Function Connect-Puzzel {
 
-    [CmdletBinding(DefaultParameterSetName="Credentials")]
+    [CmdletBinding(DefaultParameterSetName = "Credentials")]
     param(
         [Parameter(
-            ParameterSetName="Credentials",
-            Mandatory=$false
+            ParameterSetName = "Credentials",
+            Mandatory = $false
         )]
         [PSCredential] $Credential,
 
         [Parameter(
-            ParameterSetName="Token",
-            Mandatory=$true
+            ParameterSetName = "Token",
+            Mandatory = $true
         )]
         [string]
         $Token
@@ -45,7 +45,8 @@ Function Connect-Puzzel {
         $AuthData = $Auth.Content | ConvertFrom-Json
         $Script:AuthInfo.AccessToken = $AuthData.result
 
-    } elseif ($PSCmdlet.ParameterSetName -eq "Token") {
+    }
+    elseif ($PSCmdlet.ParameterSetName -eq "Token") {
 
         $Script:AuthInfo.AccessToken = $Token
 
