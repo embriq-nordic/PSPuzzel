@@ -1,4 +1,4 @@
-function Get-PuzzelSession {
+function Get-PuzzelContactCentreSession {
     [CmdletBinding()]
     param ()
     
@@ -9,9 +9,5 @@ function Get-PuzzelSession {
         } else {
             $Script:AuthInfo
         }
-    }
-    
-    end {
-        
     }
 }

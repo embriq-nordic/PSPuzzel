@@ -1,4 +1,4 @@
-function Remove-PuzzelSession {
+function Remove-PuzzelContactCentreSession {
     [CmdletBinding()]
     param ()
     

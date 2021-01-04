@@ -1,9 +1,9 @@
-Function Get-PuzzelQueue {
+Function Get-PuzzelContactCentreQueue {
     [CmdletBinding(DefaultParameterSetName = 'Single')]
     param (
         [Parameter(
-            Mandatory=$True,
-            ValueFromPipelineByPropertyName=$True,
+            Mandatory = $True,
+            ValueFromPipelineByPropertyName = $True,
             ParameterSetName = 'Single'
         )]
         [string[]] $Id,

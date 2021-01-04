@@ -1,16 +1,16 @@
-function Get-PuzzelUser {
+function Get-PuzzelContactCentreUser {
 
     [CmdletBinding(DefaultParameterSetName = 'Single')]
     param (
         [Parameter(
-            Mandatory=$True,
-            ValueFromPipelineByPropertyName=$True,
+            Mandatory = $True,
+            ValueFromPipelineByPropertyName = $True,
             ParameterSetName = 'Single'
         )]
         [string[]] $Id,
 
         [Parameter(
-            Mandatory=$True,
+            Mandatory = $True,
             ParameterSetName = "Identity"
         )]
         [Alias('userName')]

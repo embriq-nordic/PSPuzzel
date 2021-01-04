@@ -1,4 +1,4 @@
-Function Connect-Puzzel {
+Function Connect-PuzzelContactCentre {
 
     [CmdletBinding(DefaultParameterSetName = "Credentials")]
     param(
@@ -45,8 +45,7 @@ Function Connect-Puzzel {
         $AuthData = $Auth.Content | ConvertFrom-Json
         $Script:AuthInfo.AccessToken = $AuthData.result
 
-    }
-    elseif ($PSCmdlet.ParameterSetName -eq "Token") {
+    } elseif ($PSCmdlet.ParameterSetName -eq "Token") {
 
         $Script:AuthInfo.AccessToken = $Token
 
